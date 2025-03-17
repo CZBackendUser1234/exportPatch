@@ -69,7 +69,7 @@ public class ChangesetExporter extends OsmExporter {
             String path,
             String name
     ) throws Exception {
-        String filePath = path + name + ".osc";
+        String filePath = path + "/" + name;
         File file = new File(filePath);
 
         try (Writer writer = new FileWriter(file)) {
@@ -97,21 +97,18 @@ public class ChangesetExporter extends OsmExporter {
     }
 
     private static void writePrimitive(Writer writer, OsmPrimitive primitive) throws Exception {
-        if (primitive instanceof Node) {
-            Node node = (Node) primitive;
+        if (primitive instanceof Node node) {
             writer.write(String.format("    <node id=\"%d\" version=\"%d\" timestamp=\"%s\" lat=\"%f\" lon=\"%f\">\n", node.getUniqueId(), node.getVersion(), node.getInstant().toString(), node.getCoor().lat(), node.getCoor().lon()));
             writeTags(writer, node);
             writer.write("    </node>\n");
-        } else if (primitive instanceof Way) {
-            Way way = (Way) primitive;
+        } else if (primitive instanceof Way way) {
             writer.write(String.format("    <way id=\"%d\" version=\"%d\" timestamp=\"%s\">\n", way.getUniqueId(), way.getVersion(), way.getInstant().toString()));
             for (Node node : way.getNodes()) {
                 writer.write(String.format("      <nd ref=\"%d\"/>\n", node.getUniqueId()));
             }
             writeTags(writer, way);
             writer.write("    </way>\n");
-        } else if (primitive instanceof Relation) {
-            Relation relation = (Relation) primitive;
+        } else if (primitive instanceof Relation relation) {
             writer.write(String.format("    <relation id=\"%d\" version=\"%d\" timestamp=\"%s\">\n", relation.getUniqueId(), relation.getVersion(), relation.getInstant().toString()));
             for (RelationMember member : relation.getMembers()) {
                 writer.write(String.format("      <member type=\"%s\" ref=\"%d\" role=\"%s\"/>\n", member.getType(), member.getUniqueId(), member.getRole()));
