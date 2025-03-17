@@ -7,7 +7,6 @@ import org.openstreetmap.josm.gui.layer.OsmDataLayer;
 import org.openstreetmap.josm.tools.Logging;
 
 import java.io.*;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +52,9 @@ public class ChangesetExporter extends OsmExporter {
 
             String path = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf('/'));
 
-            String finalPath = saveToOscFile(createPrimitives, modifyPrimitives, deletedPrimitives, path);
+            String name = file.getName();
+
+            String finalPath = saveToOscFile(createPrimitives, modifyPrimitives, deletedPrimitives, path, name);
 
             Logging.info("Changeset exported to " + finalPath);
         } catch (Exception e) {
@@ -65,9 +66,10 @@ public class ChangesetExporter extends OsmExporter {
             List<OsmPrimitive> created,
             List<OsmPrimitive> modified,
             List<OsmPrimitive> deleted,
-            String path
+            String path,
+            String name
     ) throws Exception {
-        String filePath = path + "/patch_" + Instant.now().getEpochSecond() + ".osc";
+        String filePath = path + name + ".osc";
         File file = new File(filePath);
 
         try (Writer writer = new FileWriter(file)) {
