@@ -81,4 +81,4 @@ https://josm.openstreetmap.de/doc/
 
 ---
 
-Copyright (c) 2024, MT Inc. Released under the GPL License.
+Copyright (c) 2025, MT Inc. Released under the GPL License.
