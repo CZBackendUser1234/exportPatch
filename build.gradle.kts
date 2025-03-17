@@ -27,7 +27,7 @@ tasks.register<Jar>("jarExp") {
         attributes(
             "Manifest-Version" to "1.0",
             "Plugin-Mainversion" to "19342",
-            "Plugin-Version" to "1.0.0",
+            "Plugin-Version" to "1.1.0",
             "Plugin-Class" to "org.openstreetmap.josm.plugins.patchExport.PatchExportPlugin",
             "Plugin-Description" to "Export changes as OSC patches",
             "Plugin-Date" to "2025-03-17 15:12:11 +0300",
