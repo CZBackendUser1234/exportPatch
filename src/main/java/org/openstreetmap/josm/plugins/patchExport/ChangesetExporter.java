@@ -98,7 +98,7 @@ public class ChangesetExporter extends OsmExporter {
 
     private static void writePrimitive(Writer writer, OsmPrimitive primitive) throws Exception {
         if (primitive instanceof Node node) {
-            writer.write(String.format("    <node id=\"%d\" version=\"%d\" timestamp=\"%s\" lat=\"%f\" lon=\"%f\">\n", node.getUniqueId(), node.getVersion(), node.getInstant().toString(), node.getCoor().lat(), node.getCoor().lon()));
+            writer.write(String.format("    <node id=\"%d\" version=\"%d\" timestamp=\"%s\" lat=\"%f\" lon=\"%f\">\n", node.getUniqueId(), node.getVersion(), node.getInstant().toString(), node.getCoor().lat(), node.getCoor().lon()).replace(',', '.'));
             writeTags(writer, node);
             writer.write("    </node>\n");
         } else if (primitive instanceof Way way) {

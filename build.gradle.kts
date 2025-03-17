@@ -22,7 +22,7 @@ repositories {
 
 tasks.register<Jar>("jarExp") {
     archiveBaseName.set("patchExport")
-    archiveVersion.set("1.0.0")
+    archiveVersion.set("1.1.0")
     manifest {
         attributes(
             "Manifest-Version" to "1.0",
